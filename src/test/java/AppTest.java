@@ -5,12 +5,12 @@ import java.util.List;
 public class AppTest {
   public static void main(String[] args) {
     // 파라미터 분석
-    String queryString = "d=40&a=10&b=20&c=30&f=15";
+    String queryString = "id=20&subject=자바수업&content=내용&writerName=김철수";
     String[] queryStringBits = queryString.split("&");
     System.out.println(Arrays.toString(queryStringBits));
 
     List<String> paramNames = new ArrayList<>();
-    List<Integer> paramValues = new ArrayList<>();
+    List<String> paramValues = new ArrayList<>();
 
     for(String bit : queryStringBits) {
       String[] bitBits = bit.split("=");
@@ -18,14 +18,13 @@ public class AppTest {
       String paramValue = bitBits[1];
 
       paramNames.add(paramName);
-      paramValues.add(Integer.parseInt(paramValue));
+      paramValues.add(paramValue);
     }
 
-    for(int i = 0; i < paramNames.size(); i++) {
-      String paramName = paramNames.get(i);
-      int paramValue = paramValues.get(i);
+    System.out.println(paramNames);
+    System.out.println(paramValues);
 
-      System.out.printf("%s : %d\n", paramName, paramValue);
-    }
+    int findIndex = paramNames.indexOf("content");
+    System.out.println(paramValues.get(findIndex));
   }
 }
