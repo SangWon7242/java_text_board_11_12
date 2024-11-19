@@ -3,19 +3,38 @@ import java.util.Map;
 
 public class AppTest {
   public static void main(String[] args) {
-    // 파라미터 분석
-    String url = "/usr/article/write?id=20&subject=자바수업&content=내용&writerName=김철수&hitCount=30";
-    Map<String, String> params = Util.getParamsFromUrl(url);
+    Rq rq = new Rq("/usr/article/write?id=20&subject=자바수업&content=내용&writerName=김철수&hitCount=30");
+    Map<String, String> params = rq.getParams();
     System.out.println(params);
+    System.out.println(rq.getParams());
+    System.out.println(rq.getParams());
 
-    String urlPath = Util.getPathFromUrl(url);
+    String urlPath = rq.getUrlPath();
     System.out.println(urlPath);
+    System.out.println(rq.getUrlPath());
+    System.out.println(rq.getUrlPath());
+  }
+}
 
+class Rq {
+  String url;
+
+  Rq(String url) {
+    this.url = url;
+  }
+
+  public Map<String, String> getParams() {
+    return Util.getParamsFromUrl(url);
+  }
+
+  public String getUrlPath() {
+    return Util.getPathFromUrl(url);
   }
 }
 
 class Util {
   static Map<String, String> getParamsFromUrl(String url) {
+    System.out.println("getParamsFromUrl 실행!!");
     Map<String, String> params = new HashMap<>();
     String[] urlBits = url.split("\\?", 2);
 
@@ -39,6 +58,7 @@ class Util {
   }
 
   static String getPathFromUrl(String url) {
+    System.out.println("getPathFromUrl 실행!!");
     return url.split("\\?", 2)[0];
   }
 }
