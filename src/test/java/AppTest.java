@@ -8,11 +8,9 @@ public class AppTest {
     Map<String, String> params = Util.getParamsFromUrl(url);
     System.out.println(params);
 
-    System.out.println(params.get("id")); // 20
-    System.out.println(params.get("subject")); // 자바수업
-    System.out.println(params.get("content")); // 내용
-    System.out.println(params.get("writerName")); // 김철수
-    System.out.println(params.get("hitCount")); // 30
+    String urlPath = Util.getPathFromUrl(url);
+    System.out.println(urlPath);
+
   }
 }
 
@@ -38,5 +36,9 @@ class Util {
     }
 
     return params;
+  }
+
+  static String getPathFromUrl(String url) {
+    return url.split("\\?", 2)[0];
   }
 }
