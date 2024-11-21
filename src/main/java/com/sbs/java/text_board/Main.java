@@ -46,14 +46,31 @@ public class Main {
           continue;
         }
 
+        Map<String, String> params = rq.getParams();
+
+        boolean orderByIdDesc = true;
+
+        if(params.containsKey("orderBy") && params.get("orderBy").equals("idAsc")) {
+          orderByIdDesc = false;
+        }
+
         System.out.println("== 게시물 리스트 ==");
 
         System.out.println("번호 | 제목");
 
-        for(int i = articles.size() - 1; i >= 0; i--) {
-          Article article = articles.get(i);
-          System.out.printf("%d | %s\n", article.id, article.subject);
+        if(orderByIdDesc) {
+          for(int i = articles.size() - 1; i >= 0; i--) {
+            Article article = articles.get(i);
+            System.out.printf("%d | %s\n", article.id, article.subject);
+          }
         }
+        else {
+          articles.forEach(
+              article -> System.out.printf("%d | %s\n", article.id, article.subject)
+          );
+        }
+
+
 
       } else if (rq.getUrlPath().equals("/usr/article/detail")) {
         if(articles.isEmpty()) {
