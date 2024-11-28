@@ -2,11 +2,14 @@ package com.sbs.java.text_board;
 
 import com.sbs.java.text_board.article.ArticleController;
 import com.sbs.java.text_board.container.Container;
+import com.sbs.java.text_board.member.MemberController;
 
 public class App {
+  public MemberController memberController;
   public ArticleController articleController;
 
   public App() {
+    memberController = Container.memberController;
     articleController = Container.articleController;
   }
 
@@ -30,6 +33,8 @@ public class App {
         articleController.doModify(rq);
       } else if (rq.getUrlPath().equals("/usr/article/delete")) {
         articleController.doDelete(rq);
+      } else if (rq.getUrlPath().equals("/usr/member/join")) {
+        memberController.doJoin(rq);
       } else if (rq.getUrlPath().equals("exit")) {
         System.out.println("프로그램을 종료합니다.");
         break;
