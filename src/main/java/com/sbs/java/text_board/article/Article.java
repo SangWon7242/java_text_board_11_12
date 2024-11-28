@@ -1,18 +1,14 @@
 package com.sbs.java.text_board.article;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Article {
-  public int id;
-  public String subject;
-  public String content;
-
-  public Article(int id, String subject, String content) {
-    this.id = id;
-    this.subject = subject;
-    this.content = content;
-  }
-
-  @Override
-  public String toString() {
-    return "{id: %d, subject: \"%s\", content: \"%s\"}".formatted(id, subject, content);
-  }
+  private int id;
+  private String subject;
+  private String content;
 }
