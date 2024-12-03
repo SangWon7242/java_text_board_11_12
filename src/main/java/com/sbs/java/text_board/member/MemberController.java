@@ -160,4 +160,15 @@ public class MemberController {
     }
 
   }
+
+  public void doLogout(Rq rq) {
+    if(rq.isLogout()) {
+      System.out.println("로그인 후 이용해주세요.");
+      return;
+    }
+
+    rq.removeSessionAttr("loginedMember");
+
+    System.out.println("로그아웃 되었습니다.");
+  }
 }
