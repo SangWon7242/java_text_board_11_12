@@ -10,6 +10,14 @@ public class MemberRepository {
   public MemberRepository() {
     members = new ArrayList<>();
     lastId = 0;
+
+    makeTestData();
+  }
+
+  void makeTestData() {
+    members.add(new Member(1, "user1", "1234", "김철수"));
+    members.add(new Member(2, "love", "2345", "김덕희"));
+    members.add(new Member(3, "hello", "12555", "최영희"));
   }
 
   public void join(String loginId, String loginPW, String name) {

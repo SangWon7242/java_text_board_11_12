@@ -4,6 +4,7 @@ import com.sbs.java.text_board.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class ArticleRepository {
   private List<Article> articles;
@@ -12,6 +13,13 @@ public class ArticleRepository {
   public ArticleRepository() {
     articles = new ArrayList<>();
     lastId = 0;
+
+    makeTestData();
+  }
+
+  void makeTestData() {
+    IntStream.rangeClosed(1, 100)
+        .forEach(i -> write("제목" + i, "내용" + i));
   }
 
   public int write(String subject, String content) {
