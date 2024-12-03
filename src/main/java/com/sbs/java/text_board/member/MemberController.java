@@ -15,11 +15,21 @@ public class MemberController {
     String loginPW;
     String loginPwConfirm;
     String name;
+    Member member;
+
+    System.out.println("== 회원가입 ==");
 
     // 로그인 아이디 입력
     while (true) {
       System.out.print("로그인 아이디 : ");
       loginId = Container.sc.nextLine();
+
+      member = memberService.findByLoginId(loginId);
+
+      if(member != null) {
+        System.out.printf("\"%s\"(은)는 이미 가입 된 로그인 아이디입니다.\n", loginId);
+        continue;
+      }
 
       if (loginId.trim().isEmpty()) {
         System.out.println("로그인 아이디를 입력해주세요.");
@@ -81,6 +91,8 @@ public class MemberController {
     String loginId;
     String loginPW;
     Member member;
+
+    System.out.println("== 로그인 ==");
 
     // 로그인 아이디 입력
     while (true) {
