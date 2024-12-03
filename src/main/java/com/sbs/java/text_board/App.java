@@ -1,7 +1,9 @@
 package com.sbs.java.text_board;
 
 import com.sbs.java.text_board.article.ArticleController;
+import com.sbs.java.text_board.base.session.Session;
 import com.sbs.java.text_board.container.Container;
+import com.sbs.java.text_board.member.Member;
 import com.sbs.java.text_board.member.MemberController;
 
 public class App {
@@ -18,7 +20,17 @@ public class App {
     System.out.println("== 자바 텍스트 게시판 시작 ==");
 
     while (true) {
-      System.out.print("명령) ");
+      Session session = Container.session;
+
+      Member member = (Member) session.getAttribute("loginedMember");
+
+      String promptName = "명령";
+
+      if(member != null) {
+        promptName = member.getLoginId();
+      }
+
+      System.out.printf("%s) ", promptName);
       String cmd = Container.sc.nextLine();
 
       Rq rq = new Rq(cmd);
