@@ -19,4 +19,11 @@ public class MemberRepository {
 
     members.add(member);
   }
+
+  public Member findByLoginId(String loginId) {
+    return members.stream()
+        .filter(member -> member.getLoginId().equals(loginId))
+        .findFirst()
+        .orElse(null);
+  }
 }
