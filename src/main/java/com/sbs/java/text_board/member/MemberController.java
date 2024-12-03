@@ -92,6 +92,11 @@ public class MemberController {
     String loginPW;
     Member member;
 
+    if(rq.isLogined()) {
+      System.out.println("이미 로그인 되어 있습니다.");
+      return;
+    }
+
     System.out.println("== 로그인 ==");
 
     // 로그인 아이디 입력
@@ -147,6 +152,8 @@ public class MemberController {
 
     if(loginIsSuccess) {
       System.out.printf("\"%s\"님 로그인 되었습니다.\n", loginId);
+
+      rq.setSessionAttr("loginedMember", member);
     }
     else {
       System.out.println("로그인을 실패하였습니다.");
