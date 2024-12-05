@@ -6,6 +6,8 @@ import com.sbs.java.text_board.article.ArticleService;
 import com.sbs.java.text_board.base.interceptor.NeedLoginInterceptor;
 import com.sbs.java.text_board.base.interceptor.NeedLogoutInterceptor;
 import com.sbs.java.text_board.base.session.Session;
+import com.sbs.java.text_board.board.BoardRepository;
+import com.sbs.java.text_board.board.BoardService;
 import com.sbs.java.text_board.member.MemberController;
 import com.sbs.java.text_board.member.MemberRepository;
 import com.sbs.java.text_board.member.MemberService;
@@ -19,9 +21,11 @@ public class Container {
   public static NeedLoginInterceptor needLoginInterceptor;
   public static NeedLogoutInterceptor needLogoutInterceptor;
 
+  public static BoardRepository boardRepository;
   public static MemberRepository memberRepository;
   public static ArticleRepository articleRepository;
 
+  public static BoardService boardService;
   public static MemberService memberService;
   public static ArticleService articleService;
 
@@ -35,9 +39,11 @@ public class Container {
     needLoginInterceptor = new NeedLoginInterceptor();
     needLogoutInterceptor = new NeedLogoutInterceptor();
 
+    boardRepository = new BoardRepository();
     memberRepository = new MemberRepository();
     articleRepository = new ArticleRepository();
 
+    boardService = new BoardService();
     memberService = new MemberService();
     articleService = new ArticleService();
 
