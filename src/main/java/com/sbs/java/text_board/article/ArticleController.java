@@ -38,7 +38,7 @@ public class ArticleController {
     Member member = rq.getLoginedMember();
     // 1번회원, user1, 1234, 김철수
 
-    int id = articleService.write(subject, content, member.getName(), member.getId());
+    int id = articleService.write(subject, content, member.getName(), member.getId(), 1);
 
     System.out.printf("%d번 게시물이 등록되었습니다.\n", id);
   }
@@ -55,10 +55,10 @@ public class ArticleController {
     }
 
     System.out.println("== 게시물 리스트 ==");
-    System.out.println("번호 | 제목 | 작성자");
+    System.out.println("번호 | 제목 | 작성자 | 게시판 번호");
 
     articles.forEach(
-        article -> System.out.printf("%d | %s | %s\n", article.getId(), article.getSubject(), article.getWriterName())
+        article -> System.out.printf("%d | %s | %s | %d\n", article.getId(), article.getSubject(), article.getWriterName(), article.getBoardId())
     );
   }
 
