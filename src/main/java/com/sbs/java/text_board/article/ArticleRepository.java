@@ -19,13 +19,13 @@ public class ArticleRepository {
 
   void makeTestData() {
     IntStream.rangeClosed(1, 100)
-        .forEach(i -> write("제목" + i, "내용" + i, "익명"));
+        .forEach(i -> write("제목" + i, "내용" + i, "익명", i));
   }
 
-  public int write(String subject, String content, String name) {
+  public int write(String subject, String content, String name, int memberId) {
     int id = ++lastId;
 
-    Article article = new Article(id, subject, content, name);
+    Article article = new Article(id, subject, content, name, memberId);
 
     articles.add(article);
 
