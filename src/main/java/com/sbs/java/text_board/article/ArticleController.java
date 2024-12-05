@@ -1,19 +1,23 @@
 package com.sbs.java.text_board.article;
 
 import com.sbs.java.text_board.Rq;
+import com.sbs.java.text_board.base.session.Session;
 import com.sbs.java.text_board.container.Container;
+import com.sbs.java.text_board.member.Member;
 
 import java.util.List;
 
 public class ArticleController {
 
   private ArticleService articleService;
+  private Session session;
 
   public ArticleController() {
     articleService = Container.articleService;
+    session = Container.session;
   }
 
-  public void doWrite() {
+  public void doWrite(Rq rq) {
     System.out.println("== 게시물 작성 ==");
     System.out.print("제목 : ");
     String subject = Container.sc.nextLine();
@@ -31,7 +35,9 @@ public class ArticleController {
       return;
     }
 
-    int id = articleService.write(subject, content);
+    Member member = (Member) session.getAttribute("loginedMember");
+
+    int id = articleService.write(subject, content, member.getName());
 
     System.out.printf("%d번 게시물이 등록되었습니다.\n", id);
   }
@@ -48,10 +54,10 @@ public class ArticleController {
     }
 
     System.out.println("== 게시물 리스트 ==");
-    System.out.println("번호 | 제목");
+    System.out.println("번호 | 제목 | 작성자");
 
     articles.forEach(
-        article -> System.out.printf("%d | %s\n", article.getId(), article.getSubject())
+        article -> System.out.printf("%d | %s | %s\n", article.getId(), article.getSubject(), article.getWriterName())
     );
   }
 
@@ -72,6 +78,7 @@ public class ArticleController {
 
     System.out.println("== 게시물 상세보기 ==");
     System.out.printf("번호 : %d\n", article.getId());
+    System.out.printf("작성자 : %s\n", article.getWriterName());
     System.out.printf("제목 : %s\n", article.getSubject());
     System.out.printf("내용 : %s\n", article.getContent());
   }
