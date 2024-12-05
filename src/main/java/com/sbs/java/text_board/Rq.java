@@ -19,14 +19,16 @@ public class Rq {
 
   public Session session;
 
-  public String loginedMember = "loginedMember";
+  public String loginedMember;
 
-  public Rq(String url) {
-    this.url = url;
-    params = Util.getParamsFromUrl(this.url);
-    urlPath = Util.getPathFromUrl(this.url);
-
+  public Rq() {
     session = Container.session;
+    loginedMember = "loginedMember";
+  }
+
+  public void setCommand(String url) {
+    params = Util.getParamsFromUrl(url);
+    urlPath = Util.getPathFromUrl(url);
   }
 
   public int getIntParam(String paramName, int defaultValue) {
@@ -77,5 +79,13 @@ public class Rq {
 
   public Member getLoginedMember() {
     return (Member) session.getAttribute(loginedMember);
+  }
+
+  public void login(Member member) {
+    setSessionAttr(loginedMember, member);
+  }
+
+  public void logout() {
+    removeSessionAttr(loginedMember);
   }
 }

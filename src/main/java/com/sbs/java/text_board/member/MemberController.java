@@ -148,7 +148,7 @@ public class MemberController {
     if(loginIsSuccess) {
       System.out.printf("\"%s\"님 로그인 되었습니다.\n", loginId);
 
-      rq.setSessionAttr("loginedMember", member);
+      rq.login(member);
     }
     else {
       System.out.println("로그인을 실패하였습니다.");
@@ -157,7 +157,7 @@ public class MemberController {
   }
 
   public void doLogout(Rq rq) {
-    rq.removeSessionAttr("loginedMember");
+    rq.logout();
 
     System.out.println("로그아웃 되었습니다.");
   }

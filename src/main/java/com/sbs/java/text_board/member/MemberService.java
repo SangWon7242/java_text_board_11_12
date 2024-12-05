@@ -16,4 +16,8 @@ public class MemberService {
   public Member findByLoginId(String loginId) {
     return memberRepository.findByLoginId(loginId);
   }
+
+  public Member findById(int id) {
+    return memberRepository.findById(id);
+  }
 }
