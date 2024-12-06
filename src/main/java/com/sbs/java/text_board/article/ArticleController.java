@@ -70,11 +70,20 @@ public class ArticleController {
     }
 
     System.out.println("== 게시물 리스트 ==");
-    System.out.println("번호 | 작성 날짜 | 제목 | 작성자 | 게시판 번호");
+    System.out.println("번호 | 작성 날짜 | 제목 | 작성자 | 게시판");
 
     articles.forEach(
-        article -> System.out.printf("%d | %s | %s | %s | %d\n", article.getId(), article.getRegDate(), article.getSubject(), article.getWriterName(), article.getBoardId())
+        article -> {
+          String boardName = getBoardNameByBoardId(article.getBoardId());
+
+          System.out.printf("%d | %s | %s | %s | %s\n", article.getId(), article.getRegDate(), article.getSubject(), article.getWriterName(), boardName);
+        }
     );
+  }
+
+  private String getBoardNameByBoardId(int boardId) {
+    Board board = boardService.findByBoardId(boardId);
+    return board.getName();
   }
 
   public void showDetail(Rq rq) {
