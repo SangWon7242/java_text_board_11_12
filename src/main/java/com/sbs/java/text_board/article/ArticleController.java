@@ -60,6 +60,7 @@ public class ArticleController {
 
   public void showList(Rq rq) {
     String searchKeyword = rq.getParam("searchKeyword", "");
+    String searchKeywordTypeCode = rq.getParam("searchKeywordTypeCode", "");
     String orderBy = rq.getParam("orderBy", "idDesc");
     int boardId = rq.getIntParam("boardId", 0);
 
@@ -74,7 +75,7 @@ public class ArticleController {
       return;
     }
 
-    List<Article> articles = articleService.getArticles(searchKeyword, orderBy, boardId);
+    List<Article> articles = articleService.getArticles(searchKeyword, searchKeywordTypeCode, orderBy, boardId);
 
     if (articles.isEmpty()) {
       System.out.println("현재 게시물이 존재하지 않습니다.");
