@@ -36,6 +36,7 @@ public class ArticleRepository {
   }
 
   public List<Article> getSortedArticles(String orderBy) {
+
     List<Article> sortedArticles = articles;
 
     if(orderBy.equals("idAsc")) {
@@ -49,8 +50,22 @@ public class ArticleRepository {
     return sortedArticles;
   }
 
-  public List<Article> getArticles(String searchKeyword, String orderBy) {
+  public List<Article> getArticles(String searchKeyword, String orderBy, int boardId) {
     List<Article> filteredArticls = getSortedArticles(orderBy);
+
+    if(boardId == 0) {
+      return filteredArticls;
+    }
+
+    List<Article> boardArticles = new ArrayList<>();
+
+    if(boardId > 0) {
+      boardArticles = filteredArticls.stream()
+          .filter(article -> article.getBoardId() == boardId)
+          .toList();
+
+      return boardArticles;
+    }
 
     if (!searchKeyword.trim().isEmpty()) {
       filteredArticls = new ArrayList<>();

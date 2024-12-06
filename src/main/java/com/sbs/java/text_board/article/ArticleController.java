@@ -61,22 +61,36 @@ public class ArticleController {
   public void showList(Rq rq) {
     String searchKeyword = rq.getParam("searchKeyword", "");
     String orderBy = rq.getParam("orderBy", "idDesc");
+    int boardId = rq.getIntParam("boardId", 0);
 
-    List<Article> articles = articleService.getArticles(searchKeyword, orderBy);
+    Board board = null;
+
+    if(boardId != 0) {
+      board = boardService.findByBoardId(boardId);
+    }
+
+    if(board == null && boardId > 0) {
+      System.out.println("해당 게시판은 존재하지 않습니다.");
+      return;
+    }
+
+    List<Article> articles = articleService.getArticles(searchKeyword, orderBy, boardId);
 
     if (articles.isEmpty()) {
       System.out.println("현재 게시물이 존재하지 않습니다.");
       return;
     }
 
-    System.out.println("== 게시물 리스트 ==");
+    String boardName = board == null ? "전체" : board.getName();
+
+    System.out.printf("== %s 게시물 리스트 ==\n", boardName);
     System.out.println("번호 | 작성 날짜 | 제목 | 작성자 | 게시판");
 
     articles.forEach(
         article -> {
-          String boardName = getBoardNameByBoardId(article.getBoardId());
+          String articleBoardName = getBoardNameByBoardId(article.getBoardId());
 
-          System.out.printf("%d | %s | %s | %s | %s\n", article.getId(), article.getRegDate(), article.getSubject(), article.getWriterName(), boardName);
+          System.out.printf("%d | %s | %s | %s | %s\n", article.getId(), article.getRegDate(), article.getSubject(), article.getWriterName(), articleBoardName);
         }
     );
   }
