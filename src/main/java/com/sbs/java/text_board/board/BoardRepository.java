@@ -1,25 +1,25 @@
 package com.sbs.java.text_board.board;
 
+import com.sbs.java.text_board.util.Util;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class BoardRepository {
   private List<Board> boards;
-  private int lastId;
 
   public BoardRepository() {
     boards = new ArrayList<>();
-    lastId = 0;
 
-    makeTestData();
+    makeBoard();
   }
 
-  private void makeTestData() {
-    String regDate = "2024. 21:50. 00:00:00";
+  private void makeBoard() {
+    String regDate = Util.getNowDateStr();
     String updateDate = regDate;
 
-    boards.add(new Board(1, regDate, updateDate, "자유", "1"));
-    boards.add(new Board(2, regDate, updateDate, "공지", "2"));
+    boards.add(new Board(1, regDate, updateDate, "자유", "free"));
+    boards.add(new Board(2, regDate, updateDate, "공지", "notice"));
   }
 
   public Board findByBoardId(int id) {

@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class Article {
   private int id;
+  private String regDate;
+  private String updateDate;
   private String subject;
   private String content;
   private String writerName; // 작성자명

@@ -25,7 +25,10 @@ public class ArticleRepository {
   public int write(String subject, String content, String name, int memberId, int boardId) {
     int id = ++lastId;
 
-    Article article = new Article(id, subject, content, name, memberId, boardId);
+    String regDate = Util.getNowDateStr();
+    String updateDate = regDate;
+
+    Article article = new Article(id, regDate, updateDate, subject, content, name, memberId, boardId);
 
     articles.add(article);
 

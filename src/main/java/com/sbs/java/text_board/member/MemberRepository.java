@@ -1,5 +1,7 @@
 package com.sbs.java.text_board.member;
 
+import com.sbs.java.text_board.util.Util;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,15 +17,21 @@ public class MemberRepository {
   }
 
   void makeTestData() {
-    members.add(new Member(1, "user1", "1234", "김철수"));
-    members.add(new Member(2, "love", "2345", "김덕희"));
-    members.add(new Member(3, "hello", "12555", "최영희"));
+    String regDate = Util.getNowDateStr();
+    String updateDate = regDate;
+
+    members.add(new Member(1, regDate, updateDate, "user1", "1234", "김철수"));
+    members.add(new Member(2, regDate, updateDate, "love", "2345", "김덕희"));
+    members.add(new Member(3, regDate, updateDate, "hello", "12555", "최영희"));
   }
 
   public void join(String loginId, String loginPW, String name) {
     int id = ++lastId;
 
-    Member member = new Member(id, loginId,  loginPW, name);
+    String regDate = Util.getNowDateStr();
+    String updateDate = regDate;
+
+    Member member = new Member(id, regDate, updateDate, loginId, loginPW, name);
 
     members.add(member);
   }
