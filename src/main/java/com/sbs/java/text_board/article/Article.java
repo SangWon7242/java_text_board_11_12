@@ -16,4 +16,5 @@ public class Article {
   private String writerName; // 작성자명
   private int memberId;
   private int boardId;
+  private int hitCount;
 }

@@ -85,13 +85,13 @@ public class ArticleController {
     String boardName = board == null ? "전체" : board.getName();
 
     System.out.printf("== %s 게시물 리스트(%d건) ==\n", boardName, articles.size());
-    System.out.println("번호 | 작성 날짜 | 제목 | 작성자 | 게시판");
+    System.out.println("번호 | 작성 날짜 | 제목 | 작성자 | 게시판 | 조회수");
 
     articles.forEach(
         article -> {
           String articleBoardName = getBoardNameByBoardId(article.getBoardId());
 
-          System.out.printf("%d | %s | %s | %s | %s\n", article.getId(), article.getRegDate(), article.getSubject(), article.getWriterName(), articleBoardName);
+          System.out.printf("%d | %s | %s | %s | %s | %d\n", article.getId(), article.getRegDate(), article.getSubject(), article.getWriterName(), articleBoardName, article.getHitCount());
         }
     );
   }
@@ -116,10 +116,13 @@ public class ArticleController {
       return;
     }
 
+    articleService.increaseHitCount(article.getId());
+
     System.out.println("== 게시물 상세보기 ==");
     System.out.printf("번호 : %d\n", article.getId());
     System.out.printf("작성날짜 : %s\n", article.getRegDate());
     System.out.printf("수정날짜 : %s\n", article.getUpdateDate());
+    System.out.printf("조회수 : %s\n", article.getHitCount());
     System.out.printf("작성자 : %s\n", article.getWriterName());
     System.out.printf("제목 : %s\n", article.getSubject());
     System.out.printf("내용 : %s\n", article.getContent());
