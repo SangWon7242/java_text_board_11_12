@@ -84,7 +84,7 @@ public class ArticleController {
 
     String boardName = board == null ? "전체" : board.getName();
 
-    System.out.printf("== %s 게시물 리스트 ==\n", boardName);
+    System.out.printf("== %s 게시물 리스트(%d건) ==\n", boardName, articles.size());
     System.out.println("번호 | 작성 날짜 | 제목 | 작성자 | 게시판");
 
     articles.forEach(
