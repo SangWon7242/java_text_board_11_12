@@ -50,7 +50,7 @@ public class ArticleRepository {
     return sortedArticles;
   }
 
-  public List<Article> getArticles(String searchKeyword, String searchKeywordTypeCode, String orderBy, int boardId) {
+  public List<Article> getArticles(String searchKeyword, String searchKeywordTypeCode, String orderBy, int boardId, int limitFrom, int limitCount) {
 
     List<Article> filteredArticles = getSortedArticles(orderBy);
 
@@ -83,7 +83,14 @@ public class ArticleRepository {
     }
     // 정렬 로직 끝
 
-    return filteredArticles;
+    int totalArticlesSize = filteredArticles.size();
+    int endIndex = Math.min(limitFrom + limitCount, totalArticlesSize); // 끝 인덱스는 전체 크기를 초과하지 않도록 설정
+
+    if (limitFrom >= totalArticlesSize) {
+      return List.of(); // 시작 인덱스가 전체 크기 이상이면 빈 리스트 반환
+    }
+
+    return filteredArticles.subList(limitFrom, endIndex); // 지정된 범위의 게시물 반환
   }
 
   public void modify(int id, String subject, String content) {
